@@ -63,13 +63,13 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         
         cell.userName.text = tweet.userName
         cell.tweetText.text = tweet.text
-        cell.timeStamp.text! = ("\(tweet.timestamp)")
+        cell.timeStamp.text = ("\(tweet.timestamp!)")
         cell.profilePic.setImageWith(tweet.profilePicUrl!)
         cell.retweetCount.text = ("\(tweet.retweetCount)")
         
         cell.favorCount.text = ("\(tweet.favoritesCount)")
         
-        if(tweet.retweeted)!
+        if(tweet.retweet! == true)
         {
             cell.retweetButton.setImage(UIImage(named: "retweet-icon-green.png"), for: UIControlState.normal)
         }
@@ -77,6 +77,18 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         {
             cell.retweetButton.setImage(UIImage(named: "retweet-icon.png"), for: UIControlState.normal)
         }
+        
+        
+        if(tweet.fav! == true)
+        {
+            cell.favButton.setImage(UIImage(named: "favor-icon-red.png"), for: UIControlState.normal)
+        }
+        else
+        {
+            cell.favButton.setImage(UIImage(named: "favor-icon.png"), for: UIControlState.normal)
+        }
+
+        
         
         return cell
     }
@@ -103,13 +115,11 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
                 print("Error: \(error.localizedDescription)")
             }
         )
-        tweet.retweeted! = !(tweet.retweeted!)
-
-        if(tweet.retweeted)!
-        {
+        
+        
             cell.retweetButton.setImage(UIImage(named: "retweet-icon-green.png"), for: UIControlState.normal)
 
-        }
+        tweet.retweet = true;  
         
         
         tableView.reloadData()
@@ -138,7 +148,7 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
                 print("Error: \(error.localizedDescription)")
         }
         )
-        
+        tweet.fav = true;
         
         self.tableView.reloadData()
 

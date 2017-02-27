@@ -22,6 +22,7 @@ class TweetCell: UITableViewCell {
     
     @IBOutlet var retweetButton: UIButton!
     
+    @IBOutlet var favButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
