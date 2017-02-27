@@ -18,6 +18,7 @@ class Tweet: NSObject
     var userName: String?
     var profilePicUrl: URL?
     var id: Int?
+    var retweeted: Bool?
     
     
     init(dictionary: NSDictionary)
@@ -44,7 +45,15 @@ class Tweet: NSObject
         profilePicUrl = URL(string: imageURL! )
         
         id = dictionary["id"] as? Int
-        
+        let retweetIndicater = dictionary["retweeted"] as? Int
+        if( retweetIndicater == 1)
+        {
+            self.retweeted = true;
+        }
+        else
+        {
+            self.retweeted = false;
+        }
         
     }
     

@@ -16,6 +16,7 @@
 		8E32C7171E638C2B0073224E /* reply-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E32C7161E638C2B0073224E /* reply-icon.png */; };
 		8E32C7191E638C750073224E /* retweet-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E32C7181E638C750073224E /* retweet-icon.png */; };
 		8E32C71B1E63950B0073224E /* favor-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E32C71A1E63950B0073224E /* favor-icon.png */; };
+		8E32C71D1E63D1B30073224E /* retweet-icon-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E32C71C1E63D1B30073224E /* retweet-icon-green.png */; };
 		8E9EB7191E5BF2F7005843BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9EB7181E5BF2F7005843BA /* AppDelegate.swift */; };
 		8E9EB71E1E5BF2F7005843BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E9EB71C1E5BF2F7005843BA /* Main.storyboard */; };
 		8E9EB7201E5BF2F7005843BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9EB71F1E5BF2F7005843BA /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		8E32C7161E638C2B0073224E /* reply-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reply-icon.png"; sourceTree = "<group>"; };
 		8E32C7181E638C750073224E /* retweet-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "retweet-icon.png"; sourceTree = "<group>"; };
 		8E32C71A1E63950B0073224E /* favor-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favor-icon.png"; sourceTree = "<group>"; };
+		8E32C71C1E63D1B30073224E /* retweet-icon-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "retweet-icon-green.png"; sourceTree = "<group>"; };
 		8E9EB7151E5BF2F7005843BA /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9EB7181E5BF2F7005843BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E9EB71D1E5BF2F7005843BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			children = (
 				8E9EB72A1E5BF685005843BA /* LoginViewController.swift */,
 				8E32C6E21E6281530073224E /* TweetsViewController.swift */,
+				8E32C71C1E63D1B30073224E /* retweet-icon-green.png */,
 				8E32C6E61E6387DC0073224E /* TweetCell.swift */,
 			);
 			name = "View Controller";
@@ -199,6 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E32C71D1E63D1B30073224E /* retweet-icon-green.png in Resources */,
 				8E9EB7231E5BF2F7005843BA /* LaunchScreen.storyboard in Resources */,
 				8E32C71B1E63950B0073224E /* favor-icon.png in Resources */,
 				8E9EB7201E5BF2F7005843BA /* Assets.xcassets in Resources */,

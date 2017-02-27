@@ -69,6 +69,15 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         
         cell.favorCount.text = ("\(tweet.favoritesCount)")
         
+        if(tweet.retweeted)!
+        {
+            cell.retweetButton.setImage(UIImage(named: "retweet-icon-green.png"), for: UIControlState.normal)
+        }
+        else
+        {
+            cell.retweetButton.setImage(UIImage(named: "retweet-icon.png"), for: UIControlState.normal)
+        }
+        
         return cell
     }
     
@@ -79,6 +88,44 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         var indexPath = tableView.indexPath(for: (sender as! UIButton).superview?.superview as! UITableViewCell)
         let tweet = tweets[(indexPath?.row)!]
         TwitterClient.sharedInstance?.retweet(id: tweet.id!)
+        let cell = (sender as! UIButton).superview?.superview as! TweetCell
+        sleep(UInt32(1))
+        
+        TwitterClient.sharedInstance?.homeTimeLine(
+            
+            success:
+            { (tweets: [Tweet]) in
+                self.tweets = tweets
+                self.tableView.reloadData()
+            },
+            failure:
+            { ( error: Error) in
+                print("Error: \(error.localizedDescription)")
+            }
+        )
+        tweet.retweeted! = !(tweet.retweeted!)
+
+        if(tweet.retweeted)!
+        {
+            cell.retweetButton.setImage(UIImage(named: "retweet-icon-green.png"), for: UIControlState.normal)
+
+        }
+        
+        
+        tableView.reloadData()
+        
+    }
+    
+   
+    @IBAction func fav(_ sender: Any)
+    {
+        print("fav")
+        var indexPath = tableView.indexPath(for: (sender as! UIButton).superview?.superview as! UITableViewCell)
+        let tweet = tweets[(indexPath?.row)!]
+        TwitterClient.sharedInstance?.favorite(id: tweet.id!)
+        
+        sleep(UInt32(1))
+        
         TwitterClient.sharedInstance?.homeTimeLine(
             
             success:
@@ -91,12 +138,11 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
                 print("Error: \(error.localizedDescription)")
         }
         )
+        
+        
+        self.tableView.reloadData()
 
-        
-        tableView.reloadData()
-        
     }
-    
     
     
     @IBAction func Logout(_ sender: Any)

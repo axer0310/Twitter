@@ -127,7 +127,7 @@ class TwitterClient: BDBOAuth1SessionManager
     }
     func retweet (id: Int )
     {
-        print(id)
+        print("1.1/statuses/retweet/\(id).json")
         post("1.1/statuses/retweet/\(id).json", parameters: nil, progress: nil,
             success:
             {
@@ -147,13 +147,13 @@ class TwitterClient: BDBOAuth1SessionManager
         post("1.1/favorites/create.json?id=\(id)", parameters: nil, progress: nil,
         success:
         {
-        (task: URLSessionDataTask, response: Any?) in
-        print("Success")
+            (task: URLSessionDataTask, response: Any?) in
+            print("Success")
         },
         failure:
         {
-        (task: URLSessionDataTask?, error: Error) in
-        print("fail")
+            (task: URLSessionDataTask?, error: Error) in
+            print("fail")
         }
         )
 

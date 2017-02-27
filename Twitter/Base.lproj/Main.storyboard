@@ -110,18 +110,20 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJg-aW-Hal">
-                                                    <rect key="frame" x="86" y="104" width="25" height="25"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJg-aW-Hal">
+                                                    <rect key="frame" x="84" y="102" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" backgroundImage="retweet-icon.png"/>
+                                                    <state key="normal" image="retweet-icon.png"/>
                                                     <connections>
                                                         <action selector="retweet:" destination="o0U-a8-ThZ" eventType="touchUpInside" id="XR2-ng-IwG"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mIS-ah-0Q9">
-                                                    <rect key="frame" x="184" y="104" width="25" height="25"/>
+                                                    <rect key="frame" x="184" y="106" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" backgroundImage="favor-icon.png"/>
+                                                    <connections>
+                                                        <action selector="fav:" destination="o0U-a8-ThZ" eventType="touchUpInside" id="qTW-Ms-dfR"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -175,7 +177,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="favor-icon.png" width="30" height="30"/>
         <image name="retweet-icon.png" width="30" height="30"/>
     </resources>
 </document>
