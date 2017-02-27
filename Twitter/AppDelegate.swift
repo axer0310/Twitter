@@ -15,7 +15,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+    {
+     
+        if User.currentUser != nil
+        {
+            print("there is current user")
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+            window?.rootViewController = vc
+        }
+        else
+        {
+            print("there isn't current user ")
+        }
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil, queue: OperationQueue.main) { (Notification) in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateInitialViewController()
+            self.window?.rootViewController = vc
+        }
+        
         // Override point for customization after application launch.
         return true
     }
@@ -43,49 +64,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         print(url.description)
-        let requestToken = BDBOAuth1Credential(queryString: url.query)
         
-        let twitterClient = BDBOAuth1SessionManager(
-            baseURL: NSURL(string:"https://api.twitter.com")! as URL!,
-            consumerKey: "d3y2v26Vl3AF9psj1B3Veop9P",
-            consumerSecret: "GMMxOKQaO6upmO3VzaLu92A9AGsiuwWT3DHnzdifreohIWMRfz")
-        
-        twitterClient?.fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken,
-                                        success: {(requestToken: BDBOAuth1Credential?) ->
-                                            Void in
-                                            print("I got access token!")
-          
-                                            
-                                            twitterClient?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-                                                print("account: \(response)")
-                                                let user = response as! NSDictionary
-                                                print("name: \(user["name"]!)")
-                                                
-                                            }, failure: { (task: URLSessionDataTask?, error: Error) in
-                                
-                                                
-                                            })
-                                            twitterClient?.get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-                                                
-                                                let tweets = response as! [NSDictionary]
-                                                
-                                                for tweet in tweets
-                                                {
-                                                    print("\(tweet ["text"]!)")
-                                                }
-                                                
-                                            }, failure: { (task: URLSessionDataTask?, error: Error) in
-                                                
-                                                
-                                            })
-
-        })
-         {(error: Error?) -> Void in
-            print("error: \(error!.localizedDescription)")
-            }
-
-        
-        return true
+        let client = TwitterClient.sharedInstance
+        client?.handleURL(url: url)
+                return true
     }
 
 
