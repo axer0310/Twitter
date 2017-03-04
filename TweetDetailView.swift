@@ -67,7 +67,17 @@ class TweetDetailView: UIViewController
         TweetDetailView.tweet!.retweet = true;
     
         
-
+    }
+    @IBAction func fav(_ sender: Any)
+    {
+        TwitterClient.sharedInstance?.favorite(id: TweetDetailView.tweet!.id!)
+        
+        favButton.setImage(UIImage(named: "favor-icon-red.png"), for: UIControlState.normal)
+        var buffer = Int(favorCount.text!)
+        TweetDetailView.tweet!.favoritesCount = buffer! + 1
+        favorCount.text! = "\(TweetDetailView.tweet!.favoritesCount)"
+        
+        TweetDetailView.tweet!.fav = true;
     }
     
     override func didReceiveMemoryWarning() {

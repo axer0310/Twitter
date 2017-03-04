@@ -460,6 +460,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="favor-icon.png"/>
                                 <connections>
+                                    <action selector="fav:" destination="YCb-Q1-j31" eventType="touchUpInside" id="Dzf-hp-f2j"/>
                                     <action selector="fav:" destination="o0U-a8-ThZ" eventType="touchUpInside" id="fnt-Uk-aRh"/>
                                 </connections>
                             </button>
