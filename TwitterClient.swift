@@ -158,4 +158,57 @@ class TwitterClient: BDBOAuth1SessionManager
         )
 
     }
+    func reply(status: String, id: Int)
+    {
+        
+        print(status)
+        print(id)
+        
+        
+        var url = "1.1/statuses/update.json?status=\(status)&in_reply_to_status_id=\(id)" as! String
+        
+        guard let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            else{ print ("****error");
+                    return
+                }
+        
+        print(encodedURL)
+        
+        post(encodedURL, parameters: nil, progress: nil,
+             success:
+            {
+                (task: URLSessionDataTask, response: Any?) in
+                print("Success")
+            },
+             failure:
+            {
+                (task: URLSessionDataTask?, error: Error) in
+                print("error: \(error.localizedDescription)")
+            }
+        )
+    }
+    func newTweet(status: String)
+    {
+        var url = "1.1/statuses/update.json?status=\(status)"        
+        guard let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            else{ print ("****error");
+                return
+        }
+        
+        print(encodedURL)
+        
+        post(encodedURL, parameters: nil, progress: nil,
+             success:
+            {
+                (task: URLSessionDataTask, response: Any?) in
+                print("Success")
+        },
+             failure:
+            {
+                (task: URLSessionDataTask?, error: Error) in
+                print("error: \(error.localizedDescription)")
+        }
+        )
+    }
+    
 }

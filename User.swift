@@ -18,9 +18,15 @@ class User: NSObject
     var profileURL: URL?
     var tagline: String?
     var dictionary: NSDictionary?
+    var headerURL: URL?
+    var tweetsCount: Int?
+    var followingCount: Int?
+    var followerCount: Int?
     
     init(dictionary: NSDictionary)
     {
+        print(dictionary)
+        
         self.dictionary = dictionary
         name = dictionary["name"] as? String
         screenname = dictionary["screen_name"] as? String
@@ -31,6 +37,29 @@ class User: NSObject
         {
             profileURL = URL(string: url)
         }
+        let headerUrl = dictionary["profile_background_image_url_https"] as? String
+        
+        if let headerUrl = headerUrl
+        {
+            headerURL = URL(string: headerUrl)
+        }
+        
+
+        tweetsCount = (dictionary["statuses_count"] as? Int)!
+        followingCount = (dictionary["friends_count"] as? Int)!
+        followerCount = (dictionary["followers_count"] as? Int)!
+        
+        /*
+         var tweetCountString = dictionary["statuses_count"] as? String
+         
+         if let tweetCountString = tweetCountString
+         {
+         tweetsCount! = Int(tweetCountString)!
+         }
+
+        tweetsCount! = Int((dictionary["statuses_count"] as? String)!)!
+         
+        */
         
         tagline = dictionary["description"] as? String
     }

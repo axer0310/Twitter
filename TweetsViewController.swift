@@ -19,11 +19,13 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        navigationController?.navigationBar.barTintColor = UIColor(red:0.11, green:0.75, blue:0.96, alpha:1.0)
         tableView.dataSource = self
         tableView.delegate = self
         
-        TwitterClient.sharedInstance?.homeTimeLine(
+        TwitterClient.sharedInstance?
+            
+            .homeTimeLine(
             
             success:
             { (tweets: [Tweet]) in
@@ -69,6 +71,8 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         
         cell.favorCount.text = ("\(tweet.favoritesCount)")
         
+        
+        
         if(tweet.retweet! == true)
         {
             cell.retweetButton.setImage(UIImage(named: "retweet-icon-green.png"), for: UIControlState.normal)
@@ -93,6 +97,25 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         return cell
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        sleep(UInt32(1))
+        TwitterClient.sharedInstance?.homeTimeLine(
+            
+            success:
+            { (tweets: [Tweet]) in
+                self.tweets = tweets
+                self.tableView.reloadData()
+        },
+            failure:
+            { ( error: Error) in
+                print("Error: \(error.localizedDescription)")
+        }
+        )
+
+        
+            self.tableView.reloadData()
+    }
     
     @IBAction func retweet(_ sender: Any)
     {
@@ -160,14 +183,35 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         TwitterClient.sharedInstance?.logout()
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let cell = sender as? UITableViewCell
+        {
+        let indexPath = tableView.indexPath(for: cell)
+        let tweet = tweets![indexPath!.row]
+        
+        let descriptionView = segue.destination as! TweetDetailView;
+        TweetDetailView.tweet = tweet;
+        }
+        else if let tap = sender as? UITapGestureRecognizer
+        {
+            let imageDetailView = segue.destination as! ProfileImageDetailViewController
+          
+            var indexPath = tableView.indexPath(for: (tap as! UIGestureRecognizer).view?.superview?.superview as! UITableViewCell)
+            imageDetailView.picURL = tweets[(indexPath?.row)!].profilePicUrl!
+            
+            print(" tapped")
+            //imageDetailView.picURL =
+            
+        }
+        
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
-
+    
+    
 }
